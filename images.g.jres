@@ -1,0 +1,47 @@
+{
+    "image1": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADeAAAAAAAA4P0NYGYAAADg3d1mZogPAODd3WZmiA8A4P0NYGYAAAAA3gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "player"
+    },
+    "image2": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAREgAAAAAAEREhAAAAAAARHxEAAAAAABEREQAAAAAAEBERAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "ghost"
+    },
+    "image3": {
+        "data": "hwQQABAAAAC7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7uw==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "wall"
+    },
+    "image4": {
+        "data": "hwQQABAAAAB3d3d3d3d3d3d3d3d3d3d3d3d2d3d3dnd3d2Z3d3dmd3d3Z3Z3d3d3d3d3d3d2d3d3Z3Z3d2Z3d3d3Znd3Z3d3d3d3d3d2d3d3Z2Z2d2Zmd3d3d3Z3d3d3d3d3d3d3Znd3d3d3d3d2d3d3d3d3d3d3d2dmd3d3d3d3Z3d3d3d3dw==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "grass"
+    },
+    "image5": {
+        "data": "hwQQABAAAAB3d3d3d3d3d3dm7nd3d+d+Z2bufnd37n5mZu7ud+fufmZm7u7u7u5+Zmbu7u7u7n5mZu7u7u7ud2Zm7u7u7u53Zmbu7u7u7ndmZu7u7u7ufmZm7u7u7u5+Zmbu7u7u7n5nZu7ud+fud3dm7nd3d+53d2Z+d3d3d3d3d3d3d3d3dw==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "TREE"
+    },
+    "image6": {
+        "data": "hwQQABAAAABERERERERERETu5E7kTu5ERO7kTuRO7kRERERERERERERERERERERERO7kTuRO7kRE7uRO5E7uRERERERERERERERERERERERE7uRO5E7uRETu5E7kTu5ERERERERERERERERERERERETu5E7kTu5ERO7kTuRO7kRERERERERERA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "Inventory"
+    },
+    "image7": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP///////w8A8BERERHxAAAAHxEREQ8AAADwERER8QAAAAAfEfERDwAAAPARDx8PAAAAAB8P8AAAAAAA8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "pointer"
+    },
+    "image8": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/yIiIgIAAAD/AAAAAAAAAP8AAAAAAAAAEQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "Axe"
+    },
+    "*": {
+        "mimeType": "image/x-mkcd-f4",
+        "dataEncoding": "base64",
+        "namespace": "myImages"
+    }
+}
