@@ -39,6 +39,12 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "Axe"
     },
+    "song1": {
+        "data": "0078000408020100001c00010a006400f401640000040000000000000000000000000005000004180004000800012a0c001000012710001400011e1c0020000119",
+        "mimeType": "application/mkcd-song",
+        "displayName": "mySong",
+        "namespace": "mySongs."
+    },
     "*": {
         "mimeType": "image/x-mkcd-f4",
         "dataEncoding": "base64",
