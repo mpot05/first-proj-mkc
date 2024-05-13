@@ -145,6 +145,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, () => {
                 setTimeout(() => {
                     handAxe.destroy()
                 }, 1000)
+
             }
         }
     }
