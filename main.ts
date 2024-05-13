@@ -2,58 +2,51 @@ namespace SpriteKind {
     export const Inventory = SpriteKind.create()
     export const Axe = SpriteKind.create()
     export const groundAxe = SpriteKind.create()
+    export const handAxe = SpriteKind.create()
+    export const wood = SpriteKind.create()
 }
+scene.onHitWall(SpriteKind.handAxe, function (sprite, location) {
+    if (location.getImage() == assets.tile`tree`) {
+        tiles.setTileAt(location, assets.tile`wood`)
+        tiles.setWallAt(location, false)
+        console.log("TREE DOWN")
+    }
+})
 let inventory = sprites.create(assets.image`Inventory`, SpriteKind.Inventory)
+inventory.setFlag(SpriteFlag.Invisible, true)
 let invItems = {
     1: [""]
 }
 invItems[1].removeElement("")
+let left = true
+let player2Hands = ""
 let player2 = sprites.create(assets.image`player`, SpriteKind.Player)
 let axe = sprites.create(assets.image`Axe`, SpriteKind.groundAxe)
 scene.cameraFollowSprite(player2)
-player2.setPosition(25, 25)
-axe.setPosition(30,30)
+player2.setPosition(100, 80)
+axe.setPosition(100, 100)
 controller.moveSprite(player2, 30, 30)
-scene.setTileMap(img`
-    99999999999999999999999999999999
-    9...............................
-    9.....2.........................
-    9....2..........................
-    9...............................
-    9...............................
-    9...............................
-    9...............................
-    9...............................
-    9...............................
-    9...............................
-    9...............................
-    9...............................
-    9...............................
-    9...............................
-    9...............................
-    9...............................
-    9...............................
-    9...............................
-    9...............................
-    9...............................
-    9...............................
-    9...............................
-    9...............................
-    9...............................
-`)
-scene.setTile(9,assets.image`wall`,true)
-scene.setTile(0,assets.image`grass`)
-scene.setTile(2, assets.image`TREE`, true)
-
-inventory.setFlag(SpriteFlag.Invisible, true)
-inventory.setPosition(0,0)
+tiles.setCurrentTilemap(tilemap`level`)
 let lastX = 0
 let lastY = 0
+let lastPos: tiles.Location
 let invOpen = false
+controller.left.onEvent(ControllerButtonEvent.Pressed, () => {
+    left = true
+})
+controller.right.onEvent(ControllerButtonEvent.Pressed, () => {
+    left = false
+})
 controller.B.onEvent(ControllerButtonEvent.Pressed, () => {
     if (invOpen) {
+        sprites.allOfKind(SpriteKind.groundAxe).forEach((e) => {
+            e.setFlag(SpriteFlag.Invisible, false)
+        })
         invOpen = false
         sprites.allOfKind(SpriteKind.Axe).forEach((e) => {
+            e.destroy()
+        })
+        sprites.allOfKind(SpriteKind.wood).forEach((e) => {
             e.destroy()
         })
         player2.x = lastX
@@ -62,45 +55,97 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, () => {
         player2.setImage(assets.image`player`)
         player2.setFlag(SpriteFlag.Ghost, false)
         inventory.setFlag(SpriteFlag.Invisible, true)
-        inventory.setPosition(0,0)
+        inventory.setPosition(0, 0)
+        inventory.setPosition(0, 0)
         scene.cameraFollowSprite(player2)
-        
     }
     else {
+        sprites.allOfKind(SpriteKind.groundAxe).forEach((e) => {
+            e.setFlag(SpriteFlag.Invisible, true)
+        })
         invOpen = true
         lastX = player2.x
         lastY = player2.y
+        lastPos = player2.tilemapLocation()
+        let invX = -53
+        let invY = -44
         invItems[1].forEach((e) => {
-            console.log(e)
-            console.log(typeof ``)
             let item = sprites.create(assets.image`ghost`)
             if (e == "Axe") {
                 item.setImage(assets.image`Axe`)
                 item.setKind(SpriteKind.Axe)
             }
-            item.setPosition(lastX-53,lastY-44)
+            else if (e == "wood") {
+                item.setImage(assets.image`wood`)
+                item.setKind(SpriteKind.wood)
+            }
+            item.setPosition(lastX + invX, lastY + invY)
+            invX += 36
         })
         controller.moveSprite(player2, 60, 60)
         player2.setImage(assets.image`pointer`)
         player2.setStayInScreen(true)
-        player2.setFlag(SpriteFlag.Ghost, true)
+        player2.setFlag(SpriteFlag.GhostThroughWalls, true)
         inventory.setFlag(SpriteFlag.Invisible, false)
-        inventory.setPosition(player2.x,player2.y)
+        inventory.setPosition(player2.x, player2.y)
+        inventory.setPosition(player2.x, player2.y)
         inventory.setScale(9, ScaleAnchor.Middle)
         scene.cameraFollowSprite(inventory)
     }
-    
 })
 // invItems[1].insertAt(invItems[1].length, "Item")
 controller.A.onEvent(ControllerButtonEvent.Pressed, () => {
+    console.log(player2Hands + " in hands")
+    console.log(player2Hands + " in hands")
     if (invOpen) {
-        
+        if (sprites.allOfKind(SpriteKind.Axe).length > 0) {
+            if (player2.overlapsWith(sprites.allOfKind(SpriteKind.Axe)[0])) {
+                player2Hands = "Axe"
+            }
+        }
+        if (sprites.allOfKind(SpriteKind.wood).length > 0) {
+            sprites.allOfKind(SpriteKind.wood).forEach((e) => {
+                if (player2.overlapsWith(e)) {
+                    if (tiles.getTileAt(lastPos.col, lastPos.row) == assets.tile`wood`) {
+                    }
+                    else {
+                        e.destroy()
+                        invItems[1].removeElement("wood")
+                        tiles.setTileAt(lastPos, assets.tile`wood`)
+                    }
+                }
+            })
+        }
     }
     else {
         if (player2.overlapsWith(axe)) {
             axe.setFlag(SpriteFlag.Invisible, true)
-            axe.setPosition(0,0)
+            axe.setPosition(0, 0)
+            axe.setPosition(0, 0)
             invItems[1].insertAt(invItems[1].length, "Axe")
+        }
+        if (player2.tilemapLocation().getImage() == assets.tile`wood`) {
+            tiles.setTileAt(player2.tilemapLocation(), assets.tile`grass`)
+            invItems[1].insertAt(invItems[1].length, "wood")
+        }
+        else if (player2Hands === "Axe") {
+            if (left) {
+                let handAxe = sprites.create(assets.image`Axe`, SpriteKind.handAxe)
+                handAxe.setPosition(player2.x, player2.y)
+                handAxe.image.flipX()
+                handAxe.vx = -5
+                setTimeout(() => {
+                    handAxe.destroy()
+                }, 1000)
+            }
+            else {
+                let handAxe = sprites.create(assets.image`Axe`, SpriteKind.handAxe)
+                handAxe.setPosition(player2.x, player2.y)
+                handAxe.vx = 5
+                setTimeout(() => {
+                    handAxe.destroy()
+                }, 1000)
+            }
         }
     }
 })
