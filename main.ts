@@ -149,3 +149,10 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, () => {
         }
     }
 })
+
+tiles.getTilesByType(assets.tile`tree`).forEach((e) => {
+    tiles.setWallAt(tiles.getTileLocation(e.col, e.row), true)
+})
+tiles.getTilesByType(assets.tile`WALL`).forEach((e) => {
+    tiles.setWallAt(tiles.getTileLocation(e.col, e.row), true)
+})
