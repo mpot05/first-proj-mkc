@@ -45,6 +45,9 @@ for (let i = 0; i < 100; i++) {
     tiles.setTileAt(tiles.getRandomTileByType(assets.tile`grass`), assets.tile`tree`)
 }
 tiles.setTileAt(tiles.getRandomTileByType(assets.tile`grass`), assets.tile`tree`)
+tiles.setTileAt(tiles.getTileLocation(6,6), assets.tile`grass`)
+tiles.setTileAt(tiles.getTileLocation(6,5),assets.tile`grass`)
+tiles.setTileAt(tiles.getTileLocation(6,4), assets.tile`grass`)
 controller.B.onEvent(ControllerButtonEvent.Pressed, () => {
     if (invOpen) {
         sprites.allOfKind(SpriteKind.groundAxe).forEach((e) => {
