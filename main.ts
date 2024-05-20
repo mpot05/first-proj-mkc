@@ -37,6 +37,10 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, () => {
 controller.right.onEvent(ControllerButtonEvent.Pressed, () => {
     left = false
 })
+for (let i = 0; i < 100; i++) {
+    tiles.setTileAt(tiles.getRandomTileByType(assets.tile`grass`), assets.tile`tree`)
+}
+tiles.setTileAt(tiles.getRandomTileByType(assets.tile`grass`), assets.tile`tree`)
 controller.B.onEvent(ControllerButtonEvent.Pressed, () => {
     if (invOpen) {
         sprites.allOfKind(SpriteKind.groundAxe).forEach((e) => {
@@ -81,6 +85,10 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, () => {
             }
             item.setPosition(lastX + invX, lastY + invY)
             invX += 36
+            if (invX >= 56) {
+                invX = -53
+                invY += 25
+            }
         })
         controller.moveSprite(player2, 60, 60)
         player2.setImage(assets.image`pointer`)
@@ -101,7 +109,13 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, () => {
         if (sprites.allOfKind(SpriteKind.Axe).length > 0) {
             if (player2.overlapsWith(sprites.allOfKind(SpriteKind.Axe)[0])) {
                 player2Hands = "Axe"
+                let check = sprites.create(assets.image`check`)
+                check.setPosition(player2.tilemapLocation().x, player2.tilemapLocation().y + 1)
+                setTimeout(() => {
+                    check.destroy()
+                }, 1000)
             }
+            
         }
         if (sprites.allOfKind(SpriteKind.wood).length > 0) {
             sprites.allOfKind(SpriteKind.wood).forEach((e) => {
