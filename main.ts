@@ -18,7 +18,7 @@ let invItems = {
     1: [""]
 }
 invItems[1].removeElement("")
-let left = true
+let dir = 0
 let player2Hands = ""
 let player2 = sprites.create(assets.image`player`, SpriteKind.Player)
 let axe = sprites.create(assets.image`Axe`, SpriteKind.groundAxe)
@@ -36,10 +36,16 @@ let invPositions = {
     1: [-44, -18, 18, 45]
 }
 controller.left.onEvent(ControllerButtonEvent.Pressed, () => {
-    left = true
+    dir = 0
 })
 controller.right.onEvent(ControllerButtonEvent.Pressed, () => {
-    left = false
+    dir = 1
+})
+controller.up.onEvent(ControllerButtonEvent.Pressed, () => {
+    dir = 2
+})
+controller.down.onEvent(ControllerButtonEvent.Pressed, () => {
+    dir = 3
 })
 for (let i = 0; i < 100; i++) {
     tiles.setTileAt(tiles.getRandomTileByType(assets.tile`grass`), assets.tile`tree`)
@@ -155,24 +161,86 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, () => {
             }
         }
         else if (player2Hands === "Axe") {
-            if (left) {
-                let handAxe = sprites.create(assets.image`Axe`, SpriteKind.handAxe)
-                handAxe.setPosition(player2.x, player2.y)
-                handAxe.image.flipX()
-                handAxe.vx = -5
-                setTimeout(() => {
-                    handAxe.destroy()
-                }, 1000)
-            }
-            else {
-                let handAxe = sprites.create(assets.image`Axe`, SpriteKind.handAxe)
-                handAxe.setPosition(player2.x, player2.y)
-                handAxe.vx = 5
-                setTimeout(() => {
-                    handAxe.destroy()
-                }, 1000)
+            
+            switch (dir) {
+                case 0: { // left
+                    if (dir == 0) {
+                        let handAxe = sprites.create(assets.image`Axe`, SpriteKind.handAxe)
+                        handAxe.setPosition(player2.x, player2.y)
+                        handAxe.image.flipX()
+                        handAxe.vx = -5
+                        handAxe.vy = 0
+                        console.log("case 0 reached: " + dir)
+                        setTimeout(() => {
+                            handAxe.destroy()
+                        }, 1000)
+                    }
+                }
 
+                case 1: { // right
+                    if (dir == 1) {
+                        let handAxe = sprites.create(assets.image`Axe`, SpriteKind.handAxe)
+                        handAxe.setPosition(player2.x, player2.y)
+                        handAxe.vx = 5
+                        handAxe.vy = 0
+                        console.log("case 1 reached: " + dir)
+                        setTimeout(() => {
+                            handAxe.destroy()
+                        }, 1000)
+                    }
+                }
+
+                case 2: { // up
+                    if (dir == 2) {
+                        let handAxe = sprites.create(assets.image`Axe`, SpriteKind.handAxe)
+                        handAxe.setPosition(player2.x, player2.y)
+                        handAxe.vy = -5
+                        handAxe.vx = 0
+                        console.log("case 2 reached: " + dir)
+                        setTimeout(() => {
+                            handAxe.destroy()
+                        }, 1000)
+                    }
+                }
+
+                case 3: { // down
+                    if (dir == 3) {
+                        let handAxe = sprites.create(assets.image`Axe`, SpriteKind.handAxe)
+                        handAxe.setPosition(player2.x, player2.y)
+                        handAxe.image.flipY()
+                        handAxe.vy = 5
+                        handAxe.vx = 0
+                        console.log("case 3 reached: " + dir)
+                        setTimeout(() => {
+                            handAxe.destroy()
+                        }, 1000)
+                    }
+                }
+
+                default: {
+                    console.log("stop going to this")
+                }
+                console.log("Direction: "+dir)
+                
             }
+            // if (left) {
+            //     let handAxe = sprites.create(assets.image`Axe`, SpriteKind.handAxe)
+            //     handAxe.setPosition(player2.x, player2.y)
+            //     handAxe.image.flipX()
+            //     handAxe.vx = -5
+            //     setTimeout(() => {
+            //         handAxe.destroy()
+            //     }, 1000)
+            // }
+            // else {
+            //     let handAxe = sprites.create(assets.image`Axe`, SpriteKind.handAxe)
+            //     handAxe.setPosition(player2.x, player2.y)
+            //     handAxe.vx = 5
+            //     setTimeout(() => {
+            //         handAxe.destroy()
+            //     }, 1000)
+
+            // }
         }
     }
 })
