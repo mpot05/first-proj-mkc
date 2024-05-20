@@ -31,6 +31,10 @@ let lastX = 0
 let lastY = 0
 let lastPos: tiles.Location
 let invOpen = false
+let invPositions = {
+    0: [-53, -17, 19, 55],
+    1: [-44, -18, 18, 45]
+}
 controller.left.onEvent(ControllerButtonEvent.Pressed, () => {
     left = true
 })
@@ -71,8 +75,8 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, () => {
         lastX = player2.x
         lastY = player2.y
         lastPos = player2.tilemapLocation()
-        let invX = -53
-        let invY = -44
+        let invpos = 0
+        let invpos2 = 0
         invItems[1].forEach((e) => {
             let item = sprites.create(assets.image`ghost`)
             if (e == "Axe") {
@@ -83,11 +87,11 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, () => {
                 item.setImage(assets.image`wood`)
                 item.setKind(SpriteKind.wood)
             }
-            item.setPosition(lastX + invX, lastY + invY)
-            invX += 36
-            if (invX >= 56) {
-                invX = -53
-                invY += 25
+            item.setPosition(lastX + invPositions[0].get(invpos), lastY + invPositions[1].get(invpos2))
+            invpos++
+            if (invpos == 4) {
+                invpos = 0
+                invpos2++
             }
         })
         controller.moveSprite(player2, 60, 60)
@@ -139,8 +143,13 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, () => {
             invItems[1].insertAt(invItems[1].length, "Axe")
         }
         if (player2.tilemapLocation().getImage() == assets.tile`wood`) {
-            tiles.setTileAt(player2.tilemapLocation(), assets.tile`grass`)
-            invItems[1].insertAt(invItems[1].length, "wood")
+            if (invItems[1].length == 16) {
+                player2.sayText("Inventory full", 1000)
+            }
+            else {
+                tiles.setTileAt(player2.tilemapLocation(), assets.tile`grass`)
+                invItems[1].insertAt(invItems[1].length, "wood")
+            }
         }
         else if (player2Hands === "Axe") {
             if (left) {
