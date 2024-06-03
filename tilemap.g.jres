@@ -28,6 +28,12 @@
         "tilemapTile": true,
         "displayName": "wood"
     },
+    "tile5": {
+        "data": "hwQQABAAAADu7u7u7u7u7v7/T///9P/v/v9P///0/+/+/0////T/7/7/T///9P/vTkREREREROT+/0////T/7/7/T///9P/v/v9P///0/+/+/0////T/705ERERERETk/v9P///0/+/+/0////T/7/7/T///9P/v/v9P///0/+/u7u7u7u7u7g==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "craftingTile"
+    },
     "level1": {
         "id": "level1",
         "mimeType": "application/mkcd-tilemap",

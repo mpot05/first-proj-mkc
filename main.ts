@@ -145,6 +145,9 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, () => {
         }
     }
     else {
+        if (tiles.tileImageAtLocation(player2.tilemapLocation()) == assets.tile`craftingTile`) {
+            
+        }
         if (player2.overlapsWith(axe)) {
             axe.setFlag(SpriteFlag.Invisible, true)
             axe.setPosition(0, 0)
